@@ -49,12 +49,16 @@ componentDidMount() {
       });
     });
   }
+  removeItem(itemId) {
+    const itemRef = firebase.database().ref(`/items/${itemId}`);
+    itemRef.remove();
+  }
   render() {
     return (
       <div className='app'>
         <header>
             <div className='wrapper'>
-              <h1>Fun Food Friends</h1>
+              <h1>Food with Friends</h1>
               
             </div>
         </header>
