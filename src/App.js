@@ -53,6 +53,10 @@ componentDidMount() {
     const itemRef = firebase.database().ref(`/items/${itemId}`);
     itemRef.remove();
   }
+  updateItem(itemId) {
+    const itemRef = firebase.database().ref(`/items/${itemId}`);
+    itemRef.update();
+  }
   render() {
     return (
       <div className='app'>
@@ -62,24 +66,24 @@ componentDidMount() {
               
             </div>
         </header>
-        <div className='container'>
-          <section className='add-item'>
+        <div className='container-fluid main-container'>
+          <section className='add-item col-lg-3'>
               <form onSubmit={this.handleSubmit}>
-                <input type="text" name="username" placeholder="What's your name?" onChange={this.handleChange} value={this.state.username} />
-    <input type="text" name="currentItem" placeholder="What are you bringing?" onChange={this.handleChange} value={this.state.currentItem} />
+                <input type="text" name="username" placeholder="What's your name?" onChange={this.handleChange} value={this.state.username} required />
+    <input type="text" name="currentItem" placeholder="What are you bringing?" onChange={this.handleChange} value={this.state.currentItem} required />
                 <button>Add Item</button>
               </form>
           </section>
           <section className='display-item'>
-              <div className="wrapper">
+              <div className="">
                 <ul>
                   {this.state.items.map((item) => {
                     return (
-                      <li key={item.id}>
+                      <li class="col-lg-4" key={item.id}>
                         <h3>{item.title}</h3>
                         <p>brought by: {item.user}
-                          <button onClick={() => this.removeItem(item.id)}>Remove Item</button>
                         </p>
+                        <button onClick={() => this.removeItem(item.id)}><i class="fa fa-trash-o" aria-hidden="true"></i> Remove Item</button>
                       </li>
                     )
                   })}
